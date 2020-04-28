@@ -1,0 +1,12 @@
+curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+python get-pip.py
+sudo pip install -U virtualenv
+sudo pip install --ignore-installed tensorflow-gpu==1.15
+git clone https://github.com/tensorflow/benchmarks.git
+cd benchmarks
+cd scripts
+cd tf_cnn_benchmarks
+chmod 777 tf_cnn_benchmarks.py
+
+python scripts/tf_cnn_benchmarks/tf_cnn_benchmarks.py --num_gpus=1 --batch_size=32 --model=resnet50 --variable_update=parameter_server
+python scripts/tf_cnn_benchmarks/tf_cnn_benchmarks.py --num_gpus=1 --device=gpu --batch_size=32 --model=resnet50 --variable_update=parameter_server --data_format=NHWC
